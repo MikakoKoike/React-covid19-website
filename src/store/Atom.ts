@@ -9,3 +9,7 @@ export const dataState = atom({
   key: "dataState",
   default: "",
 });
+export const ndeathsState = atom({
+  key: "ndeathsState",
+  default: "",
+});

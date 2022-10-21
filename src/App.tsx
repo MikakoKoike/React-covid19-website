@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "./logo.svg";
+
 import "./App.css";
 import { PrimaryButton } from "./components/atoms/button/PrimaryButton";
 import { SecondaryButton } from "./components/atoms/button/SecondaryButton";
@@ -15,11 +15,11 @@ export const App = () => {
       <RecoilRoot>
         <Header></Header>
         <TopChart></TopChart>
-        <Sample></Sample>
+        {/* <Sample></Sample>
         <PrimaryButton>テスト</PrimaryButton>
         <SecondaryButton>検索</SecondaryButton>
         <br />
-        <SearchInput></SearchInput>
+        <SearchInput></SearchInput> */}
       </RecoilRoot>
     </div>
   );
