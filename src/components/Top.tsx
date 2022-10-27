@@ -1,9 +1,16 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { centerState, dataState, ndeathsState } from "../store/Atom";
+import {
+  centerState,
+  dataState,
+  nbedState,
+  ndeathsState,
+  nexitsState,
+} from "../store/Atom";
+import { PrefectureChart } from "./molecules/PrefectureChart";
 
-export const TopChart = () => {
+export const Top = () => {
   //useEffect内でgetDataを呼ぶ
   useEffect(() => {
     getData();
@@ -14,9 +21,10 @@ export const TopChart = () => {
       const res = await axios.get(
         "https://www.stopcovid19.jp/data/covid19japan.json"
       );
-      //   console.log(res.data);
+      console.log(res.data);
       setNcurrentpatients(res.data.ncurrentpatients);
       setNdeaths(res.data.ndeaths);
+      setNexits(res.data.nexits);
       // const response = res.data;
     } catch (error) {
       console.log(error);
@@ -27,6 +35,8 @@ export const TopChart = () => {
   const [center, setCenter] = useRecoilState(centerState);
   const [ncurrentpatients, setNcurrentpatients] = useRecoilState(dataState);
   const [ndeaths, setNdeaths] = useRecoilState(ndeathsState);
+  const [nexits, setNexits] = useRecoilState(nexitsState);
+  const [nbed,setNbed] = useRecoilState(nbedState)
   return (
     <div>
       {/* TopChart */}
@@ -52,7 +62,7 @@ export const TopChart = () => {
         </div>
         <div className="grid grid-cols-2 text-center ">
           <div className="bg-[#ad232f] text-white h-10 text-2xl md:text-4xl">
-            5
+            {Math.floor(Number())}
           </div>
           <div className="bg-[#ad232f] text-white h-10 text-2xl md:text-4xl">
             {ncurrentpatients.toLocaleString()}人
@@ -60,7 +70,7 @@ export const TopChart = () => {
           <div className="border-[#ad232f] border-2">累積退院者</div>
           <div className="border-[#ad232f] border-2">死亡者</div>
           <div className="bg-[#ad232f] text-white h-10 text-2xl md:text-4xl">
-            8
+            {nexits.toLocaleString()}人
           </div>
           <div className="bg-[#ad232f] text-white h-10 text-2xl md:text-4xl ">
             {ndeaths.toLocaleString()}人
@@ -80,6 +90,7 @@ export const TopChart = () => {
           </div>
         </div>
       </div>
+      <PrefectureChart></PrefectureChart>
     </div>
   );
 };

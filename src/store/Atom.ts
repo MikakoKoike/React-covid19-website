@@ -13,3 +13,11 @@ export const ndeathsState = atom({
   key: "ndeathsState",
   default: "",
 });
+export const nexitsState = atom({
+  key: "nexitsState",
+  default: "",
+});
+export const nbedState = atom({
+  key: "nbedState",
+  default: "",
+});
