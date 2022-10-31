@@ -14,5 +14,11 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    // tailwindcss("./tailwind.config.js"),
+    // autoprefixer({
+    //   add: true,
+    //   grid: true
+    // }),
+  ],
 };

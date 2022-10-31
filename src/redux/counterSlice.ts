@@ -15,6 +15,7 @@ export const counterSlice = createSlice({
     },
     bedInfo: [],
     ventilatorInfo: [],
+    areaInfo: [],
   },
   //reducersを作成すると自動的にactionCreatorも作成される
   reducers: {
@@ -37,6 +38,9 @@ export const counterSlice = createSlice({
       // Add user to the state array
       state.info = action.payload;
     });
+    builder.addCase(fetchPrefectureInfo.fulfilled, (state, action) => {
+      state.areaInfo = action.payload;
+    });
     builder.addCase(fetchBedInfo.fulfilled, (state, action) => {
       state.bedInfo = action.payload;
     });
@@ -56,6 +60,18 @@ export const fetchUserById = createAsyncThunk(
     return res.data;
   }
 );
+
+export const fetchPrefectureInfo = createAsyncThunk(
+  "counter2/prefectureInfo",
+  async () => {
+    const response = await axios.get(
+      "https://www.stopcovid19.jp/data/covid19japan.json"
+    );
+    // console.log(response.data.area);
+    return response.data.area;
+  }
+);
+
 export const fetchBedInfo = createAsyncThunk("couter2/bedInfo", async () => {
   const response = await axios.get(
     "https://www.stopcovid19.jp/data/covid19japan_beds/latest.json"

@@ -6,6 +6,7 @@ import {
   fetchVentilatorInfo,
 } from "../redux/counterSlice";
 import { AppStore } from "../redux/store";
+import { PrefectureChart } from "./molecules/PrefectureChart";
 
 export const TopPage = () => {
   const ncurrentpatients = useSelector(
@@ -18,21 +19,29 @@ export const TopPage = () => {
   const ventilatorNum = useSelector(
     (state: any) => state.counter.ventilatorInfo
   );
-  // console.log(ventilatorNum);
+  const lastUpdate = useSelector((state: any) => state.counter.info.lastUpdate);
 
-  // console.log(subBedn);
-  //病床数小計
+  //病床数情報
   let subBedNum = [
     {
-      bedn: 0,
+      bedn: 0, //病床数小計
+      bedn_lastUpdate: 0, //更新日
     },
   ];
+  // const [subBedNum, setSubBedNum] = useState([
+  //   {
+  //     bedn: 0, //病床数小計
+  //     bedn_lastUpdate: 0, //更新日
+  //   },
+  // ]);
+
   subBedNum.splice(0);
   for (let bedTotal of subBedn) {
     subBedNum.push({
       bedn:
         Number(bedTotal.入院患者受入確保病床) +
         Number(bedTotal.宿泊施設受入可能室数),
+      bedn_lastUpdate: bedTotal.更新日,
     });
   }
   // console.log(subBedNum);
@@ -60,15 +69,16 @@ export const TopPage = () => {
   // console.log(allVentilatorInfo[47]);
 
   const [totalBedNum, setTotalBedNum] = useState(0);
-  // const [ventilator, setVentilator] = useState({});
+
+  // setSubBedNum(subBedNum);
+  // console.log(subBedNumber);
+
   /**
    * 全国の対策病床数（都道府県の合算）を算出する.
    */
   const getTotalBedNum = () => {
     setTotalBedNum(subBedNum.reduce((prev, current) => prev + current.bedn, 0));
-    // setVentilator({ allVentilatorInfo });
   };
-  // console.log(ventilator);
 
   const dispatch = useDispatch<AppStore>(); //actionをstoreに通知するためのdispatch
 
@@ -88,8 +98,8 @@ export const TopPage = () => {
       {/* <div>{ncurrentpatients.toLocaleString()}</div>
       <div>{ndeaths}</div>
       <div>{nexits}</div> */}
-      <div className="border-2 border-opacity-100 border-[#ad232f] w-fit">
-        <div className="grid grid-cols-2 text-center  ">
+      <div className="border-opacity-100 border-[#ad232f]  justify-center md:grid md:justify-start">
+        <div className="grid grid-cols-2 text-center  md:grid md:justify-start">
           <div className=" border-[#ad232f] border-2 ">
             現在患者数/対策病床数
           </div>
@@ -129,13 +139,37 @@ export const TopPage = () => {
               {allVentilatorInfo[47]?.ecmo.toLocaleString()}台
             </p>
 
-            <a href="https://ja-ces.or.jp/info-ce/%e4%ba%ba%e5%b7%a5%e5%91%bc%e5%90%b8%e5%99%a8%e3%81%8a%e3%82%88%e3%81%b3ecmo%e8%a3%85%e7%bd%ae%e3%81%ae%e5%8f%96%e6%89%b1%e5%8f%b0%e6%95%b0%e7%ad%89%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e7%b7%8a/">
+            <a
+              className="url"
+              href="https://ja-ces.or.jp/info-ce/%e4%ba%ba%e5%b7%a5%e5%91%bc%e5%90%b8%e5%99%a8%e3%81%8a%e3%82%88%e3%81%b3ecmo%e8%a3%85%e7%bd%ae%e3%81%ae%e5%8f%96%e6%89%b1%e5%8f%b0%e6%95%b0%e7%ad%89%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e7%b7%8a/"
+            >
               2020年2月回答 出典 一般社団法人 日本呼吸療法医学会　公益社団法人
               日本臨床工学技士会
             </a>
           </div>
         </div>
       </div>
+      <div className="text-xs text-center md:grid md:justify-start">
+        <div>現在患者数 更新日:{lastUpdate}</div>
+        <p>対策病床数 発表日:{subBedNum[0]?.bedn_lastUpdate}</p>
+        <p>
+          新型コロナ対策病床数は「
+          <a href="https://www.mhlw.go.jp/bunya/kenkou/kekkaku-kansenshou15/02-02.html">
+            感染症指定医療機関の指定状況
+          </a>
+          」の下記合計と仮定
+        </p>
+        <div>
+          <input type="checkbox" />
+          特定 <input type="checkbox" />
+          一種 <input type="checkbox" />
+          二種（感染） <input type="checkbox" />
+          二種（結核） <input type="checkbox" />
+          二種（一般/精神）
+        </div>
+      </div>
+      <br />
+      <PrefectureChart></PrefectureChart>
     </div>
   );
 };
