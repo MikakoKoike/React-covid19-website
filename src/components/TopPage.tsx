@@ -7,6 +7,7 @@ import {
 } from "../redux/counterSlice";
 import { AppStore } from "../redux/store";
 import { PrefectureChart } from "./molecules/PrefectureChart";
+import styled from "styled-components";
 
 export const TopPage = () => {
   const ncurrentpatients = useSelector(

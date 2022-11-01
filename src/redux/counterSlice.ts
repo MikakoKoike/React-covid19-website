@@ -16,6 +16,7 @@ export const counterSlice = createSlice({
     bedInfo: [],
     ventilatorInfo: [],
     areaInfo: [],
+    ratio: [],
   },
   //reducersを作成すると自動的にactionCreatorも作成される
   reducers: {
@@ -46,6 +47,9 @@ export const counterSlice = createSlice({
     });
     builder.addCase(fetchVentilatorInfo.fulfilled, (state, action) => {
       state.ventilatorInfo = action.payload;
+    });
+    builder.addCase(fetchRatioData.fulfilled, (state, action) => {
+      state.ratio = action.payload;
     });
   },
 });
@@ -95,6 +99,13 @@ export const fetchVentilatorInfo = createAsyncThunk(
     return papa.data;
   }
 );
+
+export const fetchRatioData = createAsyncThunk("counter2/ratio", async () => {
+  const response = await axios.get(
+    "https://www.stopcovid19.jp/data/covid19japan-trend.json"
+  );
+  return response.data;
+});
 
 export const {
   //   increment,

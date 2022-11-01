@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBedInfo, fetchPrefectureInfo } from "../../redux/counterSlice";
+import styled from "styled-components";
+import {
+  fetchBedInfo,
+  fetchPrefectureInfo,
+  fetchRatioData,
+} from "../../redux/counterSlice";
 import { AppStore } from "../../redux/store";
 
 export const PrefectureChart = () => {
   const areaData = useSelector((state: any) => state.counter.areaInfo);
   const preBedData = useSelector((state: any) => state.counter.bedInfo);
-  // console.log(preBedData);
+  const ratioInfo = useSelector((state: any) => state.counter.ratio);
+  console.log(ratioInfo);
 
-  // console.log(areaData);
   let prefectureInfo = [
     {
       cityName: "",
@@ -45,13 +50,25 @@ export const PrefectureChart = () => {
         Number(bedTotal.宿泊施設受入可能室数),
     });
   }
-  // console.log(subBedNum);
+  //前日比データ
+  let ratioData = [
+    {
+      dcurrentpatients: 0,
+    },
+  ];
+  ratioData.splice(0);
+  for (let yesterdayData of ratioInfo) {
+    ratioData.push({
+      dcurrentpatients: yesterdayData.dcurrentpatients,
+    });
+  }
 
   const dispatch = useDispatch<AppStore>();
 
   useEffect(() => {
     dispatch(fetchPrefectureInfo());
     dispatch(fetchBedInfo());
+    dispatch(fetchRatioData());
   }, []);
 
   return (
@@ -67,7 +84,28 @@ export const PrefectureChart = () => {
           </div>
           {prefectureInfo.map((item, index) => (
             <div key={item.cityName} className="bg-black text-white">
-              <p className="text-xs">{item.cityName.replace("県", "")}</p>
+              <p className="text-xs h-4">
+                <span className="flex justify-center">
+                  {item.cityName.replace("県", "")}
+
+                  {(() => {
+                    if (ratioData[index]?.dcurrentpatients > 0) {
+                      return (
+                        <UpArrow
+                          className=""
+                          src={require("../../images/arrow.png")}
+                        ></UpArrow>
+                      );
+                    } else {
+                      return (
+                        <DownArrow
+                          src={require("../../images/downArrow.png")}
+                        ></DownArrow>
+                      );
+                    }
+                  })()}
+                </span>
+              </p>
               <p className="text-xs">
                 {Math.floor(
                   Number(
@@ -91,3 +129,14 @@ export const PrefectureChart = () => {
     </React.Fragment>
   );
 };
+const UpArrow = styled.img`
+  height: 13px;
+  width: 13px;
+  margin-top: 2px;
+`;
+const DownArrow = styled.img`
+  height: 13px;
+  width: 13px;
+  margin-top: 2px;
+  transform: rotate(90deg);
+`;
