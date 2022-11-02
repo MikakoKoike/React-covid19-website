@@ -12,6 +12,7 @@ import { Sample } from "./components/Sample";
 import { TopPage } from "./components/TopPage";
 import { fetchUserById } from "./redux/counterSlice";
 import { AppStore } from "./redux/store";
+import { Footer } from "./components/molecules/Footer";
 
 export const App = () => {
   //state.counterはstore.jsのcounter
@@ -36,6 +37,7 @@ export const App = () => {
       <div>{nexits}</div> */}
       {/* <Top></Top> */}
       <TopPage></TopPage>
+      <Footer></Footer>
       {/* <Sample></Sample>
         <PrimaryButton>テスト</PrimaryButton>
         <SecondaryButton>検索</SecondaryButton>
