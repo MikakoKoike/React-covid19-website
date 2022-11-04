@@ -8,11 +8,11 @@ import {
 } from "../../redux/counterSlice";
 import { AppStore } from "../../redux/store";
 
-export const PrefectureChart = () => {
+export const PrefectureChart = (props: any) => {
   const areaData = useSelector((state: any) => state.counter.areaInfo);
   const preBedData = useSelector((state: any) => state.counter.bedInfo);
   const ratioInfo = useSelector((state: any) => state.counter.ratio);
-  console.log(ratioInfo);
+  // console.log(ratioInfo);
 
   let prefectureInfo = [
     {
@@ -73,14 +73,21 @@ export const PrefectureChart = () => {
 
   return (
     <React.Fragment>
-      PrefectureChart
+      <div></div>
       {/* parent */}
-      <div className="">
+      <div className="md:grid md:basis-1/2">
         {/* grid_A */}
-        <div className=" text-center grid grid-cols-7 text-xs gap-1">
+        <div className=" text-center grid grid-cols-7 text-xs gap-1 pl-5">
           {/* grid_B */}
-          <div className="col-span-2 text-[4px]  bg-black text-white block align-text-bottom">
-            (全国)現在患者数/対策病床数
+          <div className="col-span-2 text-[4px]  bg-black text-white block align-middle">
+            <span className="text-base">
+              {props.propNcurrentpatients.toLocaleString()}
+            </span>
+            /
+            <span className="text-base">
+              {props.propBedNum.toLocaleString()}
+            </span>
+            <p> (全国)現在患者数/対策病床数</p>
           </div>
           {prefectureInfo.map((item, index) => (
             <div key={item.cityName} className="bg-black text-white">

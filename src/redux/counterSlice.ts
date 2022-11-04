@@ -17,6 +17,8 @@ export const counterSlice = createSlice({
     ventilatorInfo: [],
     areaInfo: [],
     ratio: [],
+    requiringCare: [],
+    emergencyTransportData: [],
   },
   //reducersを作成すると自動的にactionCreatorも作成される
   reducers: {
@@ -50,6 +52,12 @@ export const counterSlice = createSlice({
     });
     builder.addCase(fetchRatioData.fulfilled, (state, action) => {
       state.ratio = action.payload;
+    });
+    builder.addCase(fetchRequiringCareData.fulfilled, (state, action) => {
+      state.requiringCare = action.payload;
+    });
+    builder.addCase(fetchEmergencyData.fulfilled, (state, action) => {
+      state.emergencyTransportData = action.payload;
     });
   },
 });
@@ -106,6 +114,32 @@ export const fetchRatioData = createAsyncThunk("counter2/ratio", async () => {
   );
   return response.data;
 });
+
+export const fetchRequiringCareData = createAsyncThunk(
+  "counter2/requringCare",
+  async () => {
+    const response = await axios.get(
+      "https://www.stopcovid19.jp/data/mhlw_go_jp/opendata/requiring_inpatient_care_etc_daily.csv"
+    );
+    const papa: any = Papa.parse<any>(response.data, {
+      header: true,
+    });
+    return papa.data;
+  }
+);
+
+export const fetchEmergencyData = createAsyncThunk(
+  "counter2/emergencyData",
+  async () => {
+    const response = await axios.get(
+      "https://code4fukui.github.io/fdma_go_jp/emergencytransport_difficult_all.csv"
+    );
+    const papa: any = Papa.parse<any>(response.data, {
+      header: true,
+    });
+    return papa.data;
+  }
+);
 
 export const {
   //   increment,

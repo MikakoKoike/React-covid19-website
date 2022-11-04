@@ -1,10 +1,4 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import { PrimaryButton } from "./components/atoms/button/PrimaryButton";
-import { SecondaryButton } from "./components/atoms/button/SecondaryButton";
-import { SearchInput } from "./components/molecules/SearchInput";
 import { Header } from "./components/Header";
 import { Top } from "./components/Top";
 import { RecoilRoot } from "recoil";
@@ -12,7 +6,8 @@ import { Sample } from "./components/Sample";
 import { TopPage } from "./components/TopPage";
 import { fetchUserById } from "./redux/counterSlice";
 import { AppStore } from "./redux/store";
-import { Footer } from "./components/molecules/Footer";
+import { Footer } from "./components/Footer";
+import { TopChart } from "./components/TopChart";
 
 export const App = () => {
   //state.counterはstore.jsのcounter
@@ -32,12 +27,10 @@ export const App = () => {
     <div>
       {/* <RecoilRoot> */}
       <Header></Header>
-      {/* <div>{ncurrentpatients.toLocaleString()}</div>
-      <div>{ndeaths}</div>
-      <div>{nexits}</div> */}
       {/* <Top></Top> */}
       <TopPage></TopPage>
       <Footer></Footer>
+      <TopChart></TopChart>
       {/* <Sample></Sample>
         <PrimaryButton>テスト</PrimaryButton>
         <SecondaryButton>検索</SecondaryButton>

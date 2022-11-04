@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import bannerA from "../../images/bannerA.png";
-import bannerB from "../../images/bannerB.png";
-import bannerC from "../../images/bannerC.png";
+import bannerA from "../images/bannerA.png";
+import bannerB from "../images/bannerB.png";
+import bannerC from "../images/bannerC.png";
 
 export const Footer = () => {
   return (
@@ -19,9 +19,3 @@ export const Footer = () => {
     </div>
   );
 };
-
-// const Banner1 = styled.img`
-//   width: 384px;
-//   height: 87.18px;
-//   padding: 0 21px;
-// `;
