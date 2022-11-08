@@ -8,6 +8,7 @@ import { fetchUserById } from "./redux/counterSlice";
 import { AppStore } from "./redux/store";
 import { Footer } from "./components/Footer";
 import { TopChart } from "./components/TopChart";
+import { ModalApp } from "./components/molecules/ModalSample";
 
 export const App = () => {
   //state.counterはstore.jsのcounter
@@ -31,6 +32,8 @@ export const App = () => {
       <TopPage></TopPage>
       <Footer></Footer>
       <TopChart></TopChart>
+
+      <ModalApp></ModalApp>
       {/* <Sample></Sample>
         <PrimaryButton>テスト</PrimaryButton>
         <SecondaryButton>検索</SecondaryButton>

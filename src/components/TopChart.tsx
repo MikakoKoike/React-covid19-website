@@ -28,9 +28,8 @@ ChartJS.register(
   Legend
 );
 
-//救急搬送困難事案数
-
 export const TopChart = () => {
+  //救急搬送困難事案数
   const emergencyTransport = [
     {
       x: "",

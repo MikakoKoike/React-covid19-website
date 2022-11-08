@@ -7,6 +7,9 @@ import {
   fetchRatioData,
 } from "../../redux/counterSlice";
 import { AppStore } from "../../redux/store";
+import Modal from "react-modal";
+import { JapanChart } from "../JapanChart";
+import { TopChart } from "../TopChart";
 
 export const PrefectureChart = (props: any) => {
   const areaData = useSelector((state: any) => state.counter.areaInfo);
@@ -64,7 +67,7 @@ export const PrefectureChart = (props: any) => {
   }
 
   const dispatch = useDispatch<AppStore>();
-
+  const [modalIsOpen, setIsOpen] = React.useState(false);
   useEffect(() => {
     dispatch(fetchPrefectureInfo());
     dispatch(fetchBedInfo());
@@ -79,7 +82,10 @@ export const PrefectureChart = (props: any) => {
         {/* grid_A */}
         <div className=" text-center grid grid-cols-7 text-xs gap-1 pl-5">
           {/* grid_B */}
-          <div className="col-span-2 text-[4px]  bg-black text-white block align-middle">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="col-span-2 text-[4px]  bg-black text-white block align-middle"
+          >
             <span className="text-base">
               {props.propNcurrentpatients.toLocaleString()}
             </span>
@@ -88,7 +94,8 @@ export const PrefectureChart = (props: any) => {
               {props.propBedNum.toLocaleString()}
             </span>
             <p> (全国)現在患者数/対策病床数</p>
-          </div>
+          </button>
+
           {prefectureInfo.map((item, index) => (
             <div key={item.cityName} className="bg-black text-white">
               <p className="text-xs h-4">
@@ -133,6 +140,13 @@ export const PrefectureChart = (props: any) => {
           ))}
         </div>
       </div>
+      <Modal isOpen={modalIsOpen} ariaHideApp={false}>
+        <JapanChart propsTotalBedn={props.propBedNum}></JapanChart>
+        {/* <TopChart></TopChart> */}
+        <div className="text-center pt-5">
+          <CloseBtn onClick={() => setIsOpen(false)}>とじる</CloseBtn>
+        </div>
+      </Modal>
     </React.Fragment>
   );
 };
@@ -146,4 +160,10 @@ const DownArrow = styled.img`
   width: 13px;
   margin-top: 2px;
   transform: rotate(90deg);
+`;
+
+const CloseBtn = styled.button`
+  display: inline-block;
+  text-align: center;
+  margin: 0 auto;
 `;
