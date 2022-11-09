@@ -10,6 +10,7 @@ import { AppStore } from "../../redux/store";
 import Modal from "react-modal";
 import { JapanChart } from "../JapanChart";
 import { TopChart } from "../TopChart";
+import { PrefectureModal } from "../PrefectureModal";
 
 export const PrefectureChart = (props: any) => {
   const areaData = useSelector((state: any) => state.counter.areaInfo);
@@ -68,10 +69,25 @@ export const PrefectureChart = (props: any) => {
 
   const dispatch = useDispatch<AppStore>();
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [prefectureModalIsOpen, setprefectureModalIsOpen] =
+    React.useState(false);
+  const [prop, setProp] = useState("");
+  const [subBednum, setSubBednum] = useState([]);
+
+  const showModal = (name_jp: string, subBedn: any) => {
+    // propData = name_jp;
+    setProp(name_jp);
+    setSubBednum(subBedn);
+  };
+
   useEffect(() => {
     dispatch(fetchPrefectureInfo());
     dispatch(fetchBedInfo());
     dispatch(fetchRatioData());
+  }, []);
+
+  useEffect(() => {
+    showModal(prop, subBednum);
   }, []);
 
   return (
@@ -97,7 +113,14 @@ export const PrefectureChart = (props: any) => {
           </button>
 
           {prefectureInfo.map((item, index) => (
-            <div key={item.cityName} className="bg-black text-white">
+            <button
+              key={item.cityName}
+              className="bg-black text-white"
+              onClick={() => {
+                setprefectureModalIsOpen(true);
+                showModal(item.cityName, subBedNum[index]?.bedn);
+              }}
+            >
               <p className="text-xs h-4">
                 <span className="flex justify-center">
                   {item.cityName.replace("県", "")}
@@ -136,15 +159,28 @@ export const PrefectureChart = (props: any) => {
               <span className="text-[3px]">
                 {subBedNum[index]?.bedn.toLocaleString()}
               </span>
-            </div>
+            </button>
           ))}
         </div>
       </div>
+      {/* 全国のモーダル */}
       <Modal isOpen={modalIsOpen} ariaHideApp={false}>
         <JapanChart propsTotalBedn={props.propBedNum}></JapanChart>
-        {/* <TopChart></TopChart> */}
         <div className="text-center pt-5">
           <CloseBtn onClick={() => setIsOpen(false)}>とじる</CloseBtn>
+        </div>
+      </Modal>
+      {/* 都道府県のモーダル */}
+      <Modal isOpen={prefectureModalIsOpen} ariaHideApp={false}>
+        <PrefectureModal
+          propsCityName={prop}
+          propsPrefectureInfo={prefectureInfo}
+          propsBedn={subBednum}
+        ></PrefectureModal>
+        <div className="text-center pt-5">
+          <CloseBtn onClick={() => setprefectureModalIsOpen(false)}>
+            とじる
+          </CloseBtn>
         </div>
       </Modal>
     </React.Fragment>

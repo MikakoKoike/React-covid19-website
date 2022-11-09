@@ -19,6 +19,9 @@ export const counterSlice = createSlice({
     ratio: [],
     requiringCare: [],
     emergencyTransportData: [],
+    japanAllData: [],
+    lastUpdate: [],
+    areaData: [],
   },
   //reducersを作成すると自動的にactionCreatorも作成される
   reducers: {
@@ -58,6 +61,9 @@ export const counterSlice = createSlice({
     });
     builder.addCase(fetchEmergencyData.fulfilled, (state, action) => {
       state.emergencyTransportData = action.payload;
+    });
+    builder.addCase(fetchCovid19japanAll.fulfilled, (state, action) => {
+      state.japanAllData = action.payload;
     });
   },
 });
@@ -138,6 +144,16 @@ export const fetchEmergencyData = createAsyncThunk(
       header: true,
     });
     return papa.data;
+  }
+);
+
+export const fetchCovid19japanAll = createAsyncThunk(
+  "counter2/fetchovid19japanAll",
+  async () => {
+    const response = await axios.get(
+      "https://www.stopcovid19.jp/data/covid19japan-all.json"
+    );
+    return response.data;
   }
 );
 

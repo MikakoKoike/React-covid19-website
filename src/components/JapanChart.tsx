@@ -27,7 +27,6 @@ ChartJS.register(
 );
 
 export const JapanChart = (props: any) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
   const ncurrentpatients = useSelector(
     (state: any) => state.counter.info.ncurrentpatients
   );
