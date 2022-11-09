@@ -92,7 +92,6 @@ export const JapanChart = (props: any) => {
         <span>累積死者:{ndeaths.toLocaleString()}人 </span>
         <span>対策病床数:{props.propsTotalBedn.toLocaleString()}人</span>
       </p>
-      {/* <button>とじる</button> */}
     </div>
   );
 };

@@ -29,10 +29,33 @@ ChartJS.register(
 
 export const PrefectureModal = (props: any) => {
   const japanAllData = useSelector((state: any) => state.counter.japanAllData);
-  //   console.log(props.propsPrefectureInfo);
-  //   console.log(props.propsCityName);
-  //   console.log(props.propsBedn);
-  console.log(japanAllData);
+  const [lastUpdate, setLastUpdate] = useState([]); //更新日
+  const [areaData, setAreaData] = useState([]);
+  const [lastUpdateData, setLastUpdateData] = useState([]);
+  const [areaInfo, setAreaInfo] = useState([]);
+  let dateLists: any = [];
+  let areaLists: any = [];
+  let ncurrentpatientsLists: any = [];
+  let ndeaths: any = [];
+  const getJapanAllData = () => {
+    for (let i = 0; i < japanAllData.length; i++) {
+      dateLists.push(japanAllData[i].lastUpdate);
+      areaLists.push(japanAllData[i].area);
+    }
+    setLastUpdate(dateLists);
+    setAreaData(areaLists);
+
+    for (let date of areaData) {
+      for (let area of date) {
+        if (area.name_jp === props.propsCityName) {
+          ncurrentpatientsLists.push(area.ncurrentpatients);
+          ndeaths.push(area.ndeaths);
+        }
+      }
+    }
+    setLastUpdateData(ncurrentpatientsLists);
+    setAreaInfo(ndeaths);
+  };
 
   const [propData, setPropData] = useState([
     {
@@ -68,23 +91,23 @@ export const PrefectureModal = (props: any) => {
   };
 
   const lineData = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"], //日付
+    labels: [...lastUpdate], //日付
     datasets: [
       {
         label: "入院治療を要する者",
-        data: [12, 19, 3, 5, 2, 3],
+        data: lastUpdateData,
         borderColor: ["rgb(80,80,205)"], //折れ線の色
         borderWidth: 2,
         yAxisID: "requirePatientsChart",
       },
-      //   {
-      //     label: "救急搬送困難事案数",
-      //     data: emergencyTransport,
-      //     showLine: false,
-      //     pointBackgroundColor: ["rgb(255,0,0)"],
-      //     pointBorderColor: ["rgb(119,119,119)"],
-      //     yAxisID: "emargencyChart",
-      //   },
+      {
+        label: "救急搬送困難事案数",
+        data: areaInfo,
+        showLine: false,
+        pointBackgroundColor: ["rgb(255,0,0)"],
+        pointBorderColor: ["rgb(119,119,119)"],
+        yAxisID: "emargencyChart",
+      },
     ],
   };
 
@@ -119,7 +142,8 @@ export const PrefectureModal = (props: any) => {
         (name: any) => name.cityName === props.propsCityName
       )
     );
-  }, []);
+    getJapanAllData();
+  }, [japanAllData]);
 
   return (
     <div className="text-center">
@@ -135,15 +159,16 @@ export const PrefectureModal = (props: any) => {
 
       <div style={{ display: "inline-block" }}>
         <Pie data={data} width={"500"} height={"300"} options={options} />
+
+        <p>
+          <span>累積陽性者:{propData[0]?.npatients.toLocaleString()}人</span>
+          <span> 累積退院者:{propData[0]?.nexits.toLocaleString()}人</span>
+        </p>
+        <p>
+          <span>累積死者:{propData[0]?.ndeaths.toLocaleString()}人 </span>
+          <span>対策病床数:{props.propsBedn.toLocaleString()}人</span>
+        </p>
       </div>
-      <p>
-        <span>累積陽性者:{propData[0]?.npatients.toLocaleString()}人</span>
-        <span> 累積退院者:{propData[0]?.nexits.toLocaleString()}人</span>
-      </p>
-      <p>
-        <span>累積死者:{propData[0]?.ndeaths.toLocaleString()}人 </span>
-        <span>対策病床数:{props.propsBedn.toLocaleString()}人</span>
-      </p>
       <Line data={lineData} width={70} height={30} options={lineOptions} />
     </div>
   );

@@ -30,12 +30,6 @@ export const TopPage = () => {
       bedn_lastUpdate: 0, //更新日
     },
   ];
-  // const [subBedNum, setSubBedNum] = useState([
-  //   {
-  //     bedn: 0, //病床数小計
-  //     bedn_lastUpdate: 0, //更新日
-  //   },
-  // ]);
 
   subBedNum.splice(0);
   for (let bedTotal of subBedn) {
@@ -46,7 +40,6 @@ export const TopPage = () => {
       bedn_lastUpdate: bedTotal.更新日,
     });
   }
-  // console.log(subBedNum);
 
   //人工呼吸器情報
   let allVentilatorInfo = [
@@ -68,12 +61,8 @@ export const TopPage = () => {
       cityName: ventilatorInfo["都道府県"],
     });
   }
-  // console.log(allVentilatorInfo[47]);
 
   const [totalBedNum, setTotalBedNum] = useState(0);
-
-  // setSubBedNum(subBedNum);
-  // console.log(subBedNumber);
 
   /**
    * 全国の対策病床数（都道府県の合算）を算出する.
