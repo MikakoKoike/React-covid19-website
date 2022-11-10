@@ -17,9 +17,10 @@ export const TopPage = () => {
   const nexits = useSelector((state: any) => state.counter.info.nexits);
   const npatients = useSelector((state: any) => state.counter.info.npatients);
   const subBedn = useSelector((state: any) => state.counter.bedInfo);
-  const ventilatorNum = useSelector(
-    (state: any) => state.counter.ventilatorInfo
+  const ventilatorInfo = useSelector(
+    (state: any) => state.counter.allVentilatorInfo
   );
+
   const lastUpdate = useSelector((state: any) => state.counter.info.lastUpdate);
 
   //病床数情報
@@ -37,27 +38,6 @@ export const TopPage = () => {
         Number(bedTotal.入院患者受入確保病床) +
         Number(bedTotal.宿泊施設受入可能室数),
       bedn_lastUpdate: bedTotal.更新日,
-    });
-  }
-
-  //人工呼吸器情報
-  let allVentilatorInfo = [
-    {
-      ecmo: 0,
-      ventilator: 0,
-      ce: 0,
-      cityName: "",
-    },
-  ];
-  allVentilatorInfo.splice(0);
-  for (let ventilatorInfo of ventilatorNum) {
-    allVentilatorInfo.push({
-      ecmo: Number(ventilatorInfo["ECMO装置取扱（台）"]),
-      ventilator:
-        Number(ventilatorInfo["マスク専用人工呼吸器取扱（台）"]) +
-        Number(ventilatorInfo["人工呼吸器取扱（台）"]),
-      ce: Number(ventilatorInfo["総CE（名）"]),
-      cityName: ventilatorInfo["都道府県"],
     });
   }
 
@@ -80,7 +60,7 @@ export const TopPage = () => {
 
   useEffect(() => {
     getTotalBedNum();
-  }, [subBedn, ventilatorNum]);
+  }, [subBedn, ventilatorInfo]);
 
   return (
     <div className="p-5 md:flex md:flex-wrap justify-center">
@@ -120,10 +100,10 @@ export const TopPage = () => {
         <div className="rid grid-cols-1 text-center ">
           <div className="border-[#ad232f] border-2 h-12 text-xs">
             <p>
-              臨床工学技士 {allVentilatorInfo[47]?.ce.toLocaleString()}人 /
-              人工呼吸器 {allVentilatorInfo[47]?.ventilator.toLocaleString()}台
-              / ECMO
-              {allVentilatorInfo[47]?.ecmo.toLocaleString()}台
+              臨床工学技士 {ventilatorInfo[47]?.ce.toLocaleString()}人 /
+              人工呼吸器 {ventilatorInfo[47]?.ventilator.toLocaleString()}台 /
+              ECMO
+              {ventilatorInfo[47]?.ecmo.toLocaleString()}台
             </p>
             <a
               className="url"
@@ -160,7 +140,7 @@ export const TopPage = () => {
       <PrefectureChart
         propNcurrentpatients={ncurrentpatients}
         propBedNum={totalBedNum}
-        propVentilatorInfo={allVentilatorInfo}
+        // propVentilatorInfo={allVentilatorInfo}
       ></PrefectureChart>
     </div>
   );

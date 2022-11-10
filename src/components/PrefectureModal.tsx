@@ -29,6 +29,9 @@ ChartJS.register(
 
 export const PrefectureModal = (props: any) => {
   const japanAllData = useSelector((state: any) => state.counter.japanAllData);
+  const ventilatorInfo = useSelector(
+    (state: any) => state.counter.allVentilatorInfo
+  );
   const [lastUpdate, setLastUpdate] = useState([]); //更新日
   const [areaData, setAreaData] = useState([]);
   const [lastUpdateData, setLastUpdateData] = useState([]);
@@ -156,13 +159,13 @@ export const PrefectureModal = (props: any) => {
       )
     );
     setVentilatorNum(
-      props.ventilatorInfo.filter(
+      ventilatorInfo.filter(
         (ventilator: any) => ventilator.cityName === props.propsCityName
       )
     );
 
     getJapanAllData();
-  }, [japanAllData]);
+  }, [japanAllData, ventilatorInfo]);
 
   return (
     <div className="text-center">

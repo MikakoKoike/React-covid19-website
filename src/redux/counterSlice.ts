@@ -14,15 +14,27 @@ export const counterSlice = createSlice({
       npatients: 0,
     },
     bedInfo: [], //病床数
-    ventilatorInfo: [], //呼吸器情報一覧
+    //呼吸器情報一覧
+    allVentilatorInfo: [
+      {
+        ecmo: 0,
+        ventilator: 0,
+        ce: 0,
+        cityName: "",
+      },
+    ],
     areaInfo: [], //都道府県情報一覧
     ratio: [], //前日比
     requiringCare: [], //入院治療を要する者（全国）
     emergencyTransportData: [], //救急搬送困難事案数（全国）
     japanAllData: [],
+    value: 0,
   },
   //reducersを作成すると自動的にactionCreatorも作成される
   reducers: {
+    increment: (state) => {
+      state.value += 1;
+    },
     // getData: async (state: number) => {
     //   try {
     //     const res = await axios.get(
@@ -48,8 +60,19 @@ export const counterSlice = createSlice({
     builder.addCase(fetchBedInfo.fulfilled, (state, action) => {
       state.bedInfo = action.payload;
     });
+
     builder.addCase(fetchVentilatorInfo.fulfilled, (state, action) => {
-      state.ventilatorInfo = action.payload;
+      state.allVentilatorInfo.splice(0);
+      for (let ventilatorInfo of action.payload) {
+        state.allVentilatorInfo.push({
+          ecmo: Number(ventilatorInfo["ECMO装置取扱（台）"]),
+          ventilator:
+            Number(ventilatorInfo["マスク専用人工呼吸器取扱（台）"]) +
+            Number(ventilatorInfo["人工呼吸器取扱（台）"]),
+          ce: Number(ventilatorInfo["総CE（名）"]),
+          cityName: ventilatorInfo["都道府県"],
+        });
+      }
     });
     builder.addCase(fetchRatioData.fulfilled, (state, action) => {
       state.ratio = action.payload;

@@ -30,6 +30,9 @@ export const JapanChart = (props: any) => {
   const ncurrentpatients = useSelector(
     (state: any) => state.counter.info.ncurrentpatients
   );
+  const ventilatorInfo = useSelector(
+    (state: any) => state.counter.allVentilatorInfo
+  );
   const ndeaths = useSelector((state: any) => state.counter.info.ndeaths);
   const nexits = useSelector((state: any) => state.counter.info.nexits);
   const npatients = useSelector((state: any) => state.counter.info.npatients);
@@ -87,10 +90,10 @@ export const JapanChart = (props: any) => {
         定義におけるハイリスク地域(現在患者数{ncurrentpatients}名{">"}= 10名)
       </p>
       <p className="text-xs">
-        (参考) 臨床工学技士:{props.ventilatorInfo[47]?.ce.toLocaleString()}人
+        (参考) 臨床工学技士:{ventilatorInfo[47]?.ce.toLocaleString()}人
         マスク専用含む人工呼吸器取扱:
-        {props.ventilatorInfo[47]?.ventilator.toLocaleString()}台 ECMO装置取扱:
-        {props.ventilatorInfo[47]?.ecmo.toLocaleString()}台
+        {ventilatorInfo[47]?.ventilator.toLocaleString()}台 ECMO装置取扱:
+        {ventilatorInfo[47]?.ecmo.toLocaleString()}台
       </p>
       <p className="text-xs">
         2020年2月回答 出典:
