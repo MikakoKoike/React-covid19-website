@@ -9,14 +9,12 @@ import {
 import { AppStore } from "../../redux/store";
 import Modal from "react-modal";
 import { JapanChart } from "../JapanChart";
-import { TopChart } from "../TopChart";
 import { PrefectureModal } from "../PrefectureModal";
 
 export const PrefectureChart = (props: any) => {
   const areaData = useSelector((state: any) => state.counter.areaInfo);
   const preBedData = useSelector((state: any) => state.counter.bedInfo);
   const ratioInfo = useSelector((state: any) => state.counter.ratio);
-  // console.log(ratioInfo);
 
   let prefectureInfo = [
     {
@@ -39,7 +37,6 @@ export const PrefectureChart = (props: any) => {
       npatients: eachInfo.npatients,
     });
   }
-  // console.log(prefectureInfo);
 
   const [subBedNum, setSubBedNum] = useState([
     {
@@ -75,10 +72,10 @@ export const PrefectureChart = (props: any) => {
   const [subBednum, setSubBednum] = useState([]);
 
   const showModal = (name_jp: string, subBedn: any) => {
-    // propData = name_jp;
     setProp(name_jp);
     setSubBednum(subBedn);
   };
+  const ventilatorInfo = props.propVentilatorInfo;
 
   useEffect(() => {
     dispatch(fetchPrefectureInfo());
@@ -165,7 +162,12 @@ export const PrefectureChart = (props: any) => {
       </div>
       {/* 全国のモーダル */}
       <Modal isOpen={modalIsOpen} ariaHideApp={false}>
-        <JapanChart propsTotalBedn={props.propBedNum}></JapanChart>
+        <JapanChart
+          propsTotalBedn={props.propBedNum}
+          ventilatorInfo={ventilatorInfo}
+        >
+          {" "}
+        </JapanChart>
         <div className="text-center pt-5">
           <CloseBtn onClick={() => setIsOpen(false)}>とじる</CloseBtn>
         </div>
@@ -176,6 +178,7 @@ export const PrefectureChart = (props: any) => {
           propsCityName={prop}
           propsPrefectureInfo={prefectureInfo}
           propsBedn={subBednum}
+          ventilatorInfo={ventilatorInfo}
         ></PrefectureModal>
         <div className="text-center pt-5">
           <CloseBtn onClick={() => setprefectureModalIsOpen(false)}>

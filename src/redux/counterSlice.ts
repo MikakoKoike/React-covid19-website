@@ -13,15 +13,13 @@ export const counterSlice = createSlice({
       ninspections: 0,
       npatients: 0,
     },
-    bedInfo: [],
-    ventilatorInfo: [],
-    areaInfo: [],
-    ratio: [],
-    requiringCare: [],
-    emergencyTransportData: [],
+    bedInfo: [], //病床数
+    ventilatorInfo: [], //呼吸器情報一覧
+    areaInfo: [], //都道府県情報一覧
+    ratio: [], //前日比
+    requiringCare: [], //入院治療を要する者（全国）
+    emergencyTransportData: [], //救急搬送困難事案数（全国）
     japanAllData: [],
-    lastUpdate: [],
-    areaData: [],
   },
   //reducersを作成すると自動的にactionCreatorも作成される
   reducers: {
@@ -68,52 +66,51 @@ export const counterSlice = createSlice({
   },
 });
 // 非同期で値を更新するのにcreateAsyncThunkが必要
+
 export const fetchUserById = createAsyncThunk(
   "counter2/fetchById", //slice名/任意の名前
   async () => {
     const res = await axios.get(
       "https://www.stopcovid19.jp/data/covid19japan.json"
     );
-    // console.log(res.data);
     return res.data;
   }
 );
 
+//都道府県情報一覧
 export const fetchPrefectureInfo = createAsyncThunk(
   "counter2/prefectureInfo",
   async () => {
     const response = await axios.get(
       "https://www.stopcovid19.jp/data/covid19japan.json"
     );
-    // console.log(response.data.area);
     return response.data.area;
   }
 );
 
+//病床数情報一覧
 export const fetchBedInfo = createAsyncThunk("couter2/bedInfo", async () => {
   const response = await axios.get(
     "https://www.stopcovid19.jp/data/covid19japan_beds/latest.json"
   );
-  // console.log(response.data);
-
   return response.data;
 });
 
+//呼吸器情報
 export const fetchVentilatorInfo = createAsyncThunk(
   "counter2/ventilatorInfo",
   async () => {
     const response = await axios.get(
       "https://www.stopcovid19.jp/data/ventilator-20200306.csv?1661483041372"
     );
-    // console.log(response.data);
     const papa: any = Papa.parse<any>(response.data, {
       header: true,
     });
-    // console.log(papa.data);
     return papa.data;
   }
 );
 
+//前日比データ
 export const fetchRatioData = createAsyncThunk("counter2/ratio", async () => {
   const response = await axios.get(
     "https://www.stopcovid19.jp/data/covid19japan-trend.json"
@@ -121,6 +118,7 @@ export const fetchRatioData = createAsyncThunk("counter2/ratio", async () => {
   return response.data;
 });
 
+//入院治療を要する者（全国）
 export const fetchRequiringCareData = createAsyncThunk(
   "counter2/requringCare",
   async () => {
@@ -133,7 +131,7 @@ export const fetchRequiringCareData = createAsyncThunk(
     return papa.data;
   }
 );
-
+//救急搬送困難事案数（全国）
 export const fetchEmergencyData = createAsyncThunk(
   "counter2/emergencyData",
   async () => {
@@ -146,7 +144,7 @@ export const fetchEmergencyData = createAsyncThunk(
     return papa.data;
   }
 );
-
+// 都道府県棒グラフのデータ
 export const fetchCovid19japanAll = createAsyncThunk(
   "counter2/fetchovid19japanAll",
   async () => {

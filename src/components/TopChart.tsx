@@ -40,7 +40,7 @@ export const TopChart = () => {
   const requiringCareData = useSelector(
     (state: any) => state.counter.requiringCare
   );
-  //   console.log(requiringCareData);
+
   let dateLists = [];
   for (let date of requiringCareData) {
     dateLists.push(date.Date);
@@ -53,12 +53,10 @@ export const TopChart = () => {
       info["(ALL) Requiring inpatient care"] as never
     );
   }
-  //   console.log(requiring_inpatient_care);
 
   const emergencyData = useSelector(
     (state: any) => state.counter.emergencyTransportData
   );
-  //   console.log(emergencyData);
 
   //不要な配列を削除
   [...emergencyData].splice(0, 5);
@@ -125,7 +123,6 @@ export const TopChart = () => {
   };
   return (
     <div>
-      {" "}
       <Line data={data} width={100} height={50} options={options} />
     </div>
   );

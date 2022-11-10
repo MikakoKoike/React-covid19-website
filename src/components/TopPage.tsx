@@ -7,7 +7,6 @@ import {
 } from "../redux/counterSlice";
 import { AppStore } from "../redux/store";
 import { PrefectureChart } from "./molecules/PrefectureChart";
-import styled from "styled-components";
 
 export const TopPage = () => {
   const ncurrentpatients = useSelector(
@@ -137,7 +136,7 @@ export const TopPage = () => {
         </div>
       </div>
       {/* 更新日 */}
-      <div className="text-xs text-center md:grid md:justify-start md:order-last ">
+      {/* <div className="text-xs text-center md:grid md:justify-start md:order-last ">
         <div>現在患者数 更新日:{lastUpdate}</div>
         <p>対策病床数 発表日:{subBedNum[0]?.bedn_lastUpdate}</p>
         <p>
@@ -155,12 +154,13 @@ export const TopPage = () => {
           二種（結核） <input type="checkbox" />
           二種（一般/精神）
         </div>
-      </div>
+      </div> */}
       <br />
       {/* 右都道府県チャート */}
       <PrefectureChart
         propNcurrentpatients={ncurrentpatients}
         propBedNum={totalBedNum}
+        propVentilatorInfo={allVentilatorInfo}
       ></PrefectureChart>
     </div>
   );
