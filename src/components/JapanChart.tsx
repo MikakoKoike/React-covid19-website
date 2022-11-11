@@ -68,7 +68,7 @@ export const JapanChart = (props: any) => {
         )}
         %
       </p>
-      <div style={{ display: "inline-block" }}>
+      <div className="md:inline-block">
         <Pie data={data} width={"500"} height={"350"} options={options} />
       </div>
       <p>

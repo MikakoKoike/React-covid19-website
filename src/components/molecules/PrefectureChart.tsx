@@ -140,7 +140,7 @@ export const PrefectureChart = (props: any) => {
                   })()}
                 </span>
               </p>
-              <p className="text-xs">
+              <p className="text-[10px]">
                 {Math.floor(
                   Number(
                     (item.ncurrentpatients / Number(subBedNum[index]?.bedn)) *
@@ -149,11 +149,11 @@ export const PrefectureChart = (props: any) => {
                 )}
                 %
               </p>
-              <span className="font-medium text-[3px]">
-                {item.ncurrentpatients.toLocaleString()}
+              <span className="font-medium text-[8px]">
+                {item.ncurrentpatients.toLocaleString()}/
               </span>
-              /
-              <span className="text-[3px]">
+
+              <span className="text-[8px]">
                 {subBedNum[index]?.bedn.toLocaleString()}
               </span>
             </button>

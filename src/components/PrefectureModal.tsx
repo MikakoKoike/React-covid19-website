@@ -113,6 +113,9 @@ export const PrefectureModal = (props: any) => {
     datasets: [
       {
         label: "入院治療を要する者",
+        font: {
+          size: 5,
+        },
         data: lastUpdateData,
         borderColor: ["rgb(80,80,205)"], //折れ線の色
         borderWidth: 2,
@@ -131,7 +134,7 @@ export const PrefectureModal = (props: any) => {
 
   const lineOptions: any = {
     maintainAspectRatio: true,
-    responsive: true,
+    // responsive: true,
     scales: {
       emargencyChart: {
         type: "linear",
@@ -139,6 +142,9 @@ export const PrefectureModal = (props: any) => {
         title: {
           display: true,
           text: "PCR検査陽性者数・累計死亡者数・緊急搬送困難事案数",
+          font: {
+            size: 10,
+          },
         },
       },
       requirePatientsChart: {
@@ -147,8 +153,20 @@ export const PrefectureModal = (props: any) => {
         title: {
           display: true,
           text: "PCR検査実施件数・現在入院治療を要する者",
+          font: {
+            size: 10,
+          },
         },
       },
+      // plugins: {
+      //   font: function (context: any) {
+      //     var width = context.chart.width;
+      //     var size = Math.round(width / 32);
+      //     return {
+      //       size: size,
+      //     };
+      //   },
+      // },
     },
   };
   const dispatch = useDispatch<AppStore>();
@@ -221,6 +239,7 @@ export const PrefectureModal = (props: any) => {
         </p>
         <br />
         <Line data={lineData} width={230} height={170} options={lineOptions} />
+        {/* <Line data={lineData} options={lineOptions} /> */}
       </div>
     </div>
   );
