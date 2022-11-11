@@ -106,7 +106,7 @@ export const PrefectureChart = (props: any) => {
             <span className="text-[12px] md:text-sm">
               {props.propBedNum.toLocaleString()}
             </span>
-            <p className="text-[12px]"> (全国)現在患者数/対策病床数</p>
+            <p className="text-[10px]"> (全国)現在患者数/対策病床数</p>
           </button>
           {/* 都道府県 */}
           {prefectureInfo.map((item, index) => (

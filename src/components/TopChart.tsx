@@ -109,6 +109,9 @@ export const TopChart = () => {
         title: {
           display: true,
           text: "PCR検査陽性者数・累計死亡者数・緊急搬送困難事案数",
+          font: {
+            size: 10,
+          },
         },
       },
       requirePatientsChart: {
@@ -117,13 +120,16 @@ export const TopChart = () => {
         title: {
           display: true,
           text: "PCR検査実施件数・現在入院治療を要する者",
+          font: {
+            size: 10,
+          },
         },
       },
     },
   };
   return (
     <div>
-      <Line data={data} width={100} height={50} options={options} />
+      <Line data={data} width={120} height={70} options={options} />
     </div>
   );
 };

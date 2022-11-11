@@ -238,7 +238,7 @@ export const PrefectureModal = (props: any) => {
           </a>
         </p>
         <br />
-        <Line data={lineData} width={270} height={200} options={lineOptions} />
+        <Line data={lineData} width={120} height={70} options={lineOptions} />
         {/* <Line data={lineData} options={lineOptions} /> */}
       </div>
     </div>
