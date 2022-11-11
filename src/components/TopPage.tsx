@@ -67,33 +67,37 @@ export const TopPage = () => {
       {/* 左全国チャート */}
       <div className="border-opacity-100 border-[#ad232f] justify-center md:basis-1/2 md:justify-center">
         <div className="grid grid-cols-2 text-center md:grid md:justify-start ">
-          <div className=" border-[#ad232f] border-2 ">
+          <div className=" border-[#ad232f] border-2 py-1.5 text-sm">
             現在患者数/対策病床数
           </div>
-          <div className=" border-[#ad232f] border-2">現在患者数</div>
+          <div className=" border-[#ad232f] border-2 py-1.5 text-sm">
+            現在患者数
+          </div>
         </div>
         <div className="grid grid-cols-2 text-center  ">
-          <div className="bg-[#ad232f] text-white h-14  text-2xl md:text-4xl">
+          <div className="bg-[#ad232f] text-white py-1.5  text-2xl md:text-4xl">
             {Math.floor((Number(ncurrentpatients) / Number(totalBedNum)) * 100)}
             %
           </div>
-          <div className="bg-[#ad232f] text-white h-14 text-2xl md:text-4xl align-middle">
+          <div className="inline-block bg-[#ad232f] text-white text-2xl md:text-4xl align-middle py-1.5">
             {ncurrentpatients.toLocaleString()}人
           </div>
-          <div className="border-[#ad232f] border-2">累積退院者</div>
-          <div className="border-[#ad232f] border-2">死亡者</div>
-          <div className="bg-[#ad232f] text-white h-14 text-2xl md:text-4xl">
+          <div className="border-[#ad232f] border-2 py-1.5 text-sm">
+            累積退院者
+          </div>
+          <div className="border-[#ad232f] border-2 py-1.5 text-sm">死亡者</div>
+          <div className="py-1.5 bg-[#ad232f] text-white  text-2xl md:text-4xl">
             {nexits.toLocaleString()}人
           </div>
-          <div className="bg-[#ad232f] text-white h-14 text-2xl md:text-4xl ">
+          <div className="py-1.5 bg-[#ad232f] text-white text-2xl md:text-4xl ">
             {ndeaths.toLocaleString()}人
           </div>
         </div>
         <div className="grid grid-cols-2 text-center ">
-          <div className="border-[#ad232f] border-2">
+          <div className="border-[#ad232f] border-2 py-1.5 text-sm">
             対策病床数{totalBedNum.toLocaleString()}人
           </div>
-          <div className="border-[#ad232f] border-2">
+          <div className="border-[#ad232f] border-2 py-1.5 text-sm">
             PCR検査陽性者数{npatients.toLocaleString()}人
           </div>
         </div>

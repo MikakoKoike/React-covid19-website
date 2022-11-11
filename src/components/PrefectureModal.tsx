@@ -133,8 +133,8 @@ export const PrefectureModal = (props: any) => {
   };
 
   const lineOptions: any = {
-    maintainAspectRatio: true,
-    responsive: true,
+    maintainAspectRatio: false,
+    // responsive: false,
     scales: {
       emargencyChart: {
         type: "linear",
@@ -238,11 +238,11 @@ export const PrefectureModal = (props: any) => {
           </a>
         </p>
         <br />
-        <div className="relative w-auto h-auto">
+        <div className="md:w-auto md:h-auto">
           <Line
             data={lineData}
-            width={500}
-            height={350}
+            width={280}
+            height={230}
             options={lineOptions}
           />
         </div>
