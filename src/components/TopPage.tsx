@@ -63,7 +63,7 @@ export const TopPage = () => {
   }, [subBedn, ventilatorInfo]);
 
   return (
-    <div className="p-5 md:flex md:flex-wrap justify-center">
+    <div className="p-5 md:flex md:flex-wrap justify-center ">
       {/* 左全国チャート */}
       <div className="border-opacity-100 border-[#ad232f] justify-center md:basis-1/2 md:justify-center">
         <div className="grid grid-cols-2 text-center md:grid md:justify-start ">

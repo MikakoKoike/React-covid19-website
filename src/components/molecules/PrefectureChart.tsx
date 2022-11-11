@@ -181,7 +181,10 @@ export const PrefectureChart = (props: any) => {
           ventilatorInfo={ventilatorInfo}
         ></PrefectureModal>
         <div className="text-center pt-5">
-          <CloseBtn onClick={() => setprefectureModalIsOpen(false)}>
+          <CloseBtn
+            // style={{ display: "inline-block" }}
+            onClick={() => setprefectureModalIsOpen(false)}
+          >
             とじる
           </CloseBtn>
         </div>
