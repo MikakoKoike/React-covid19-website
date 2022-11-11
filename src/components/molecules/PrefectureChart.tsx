@@ -99,14 +99,14 @@ export const PrefectureChart = (props: any) => {
             onClick={() => setIsOpen(true)}
             className="col-span-2 text-[4px]  bg-black text-white block align-middle"
           >
-            <span className="text-[10px]">
+            <span className="text-[10px] md:text-xs">
               {props.propNcurrentpatients.toLocaleString()}
             </span>
             /
-            <span className="text-[12px]">
+            <span className="text-[12px] md:text-sm">
               {props.propBedNum.toLocaleString()}
             </span>
-            <p> (全国)現在患者数/対策病床数</p>
+            <p className="text-[12px]"> (全国)現在患者数/対策病床数</p>
           </button>
           {/* 都道府県 */}
           {prefectureInfo.map((item, index) => (
@@ -118,7 +118,7 @@ export const PrefectureChart = (props: any) => {
                 showModal(item.cityName, subBedNum[index]?.bedn);
               }}
             >
-              <p className="text-[10px] h-4">
+              <p className="text-[10px] md:text-xs h-4">
                 <span className="flex justify-center">
                   {item.cityName.replace("県", "")}
 
@@ -140,7 +140,7 @@ export const PrefectureChart = (props: any) => {
                   })()}
                 </span>
               </p>
-              <p className="text-[10px]">
+              <p className="text-[10px] md:text-xs">
                 {Math.floor(
                   Number(
                     (item.ncurrentpatients / Number(subBedNum[index]?.bedn)) *
@@ -149,11 +149,11 @@ export const PrefectureChart = (props: any) => {
                 )}
                 %
               </p>
-              <span className="font-medium text-[8px]">
+              <span className="font-medium text-[6px] md:text-xs">
                 {item.ncurrentpatients.toLocaleString()}/
               </span>
 
-              <span className="text-[8px]">
+              <span className="text-[6px]">
                 {subBedNum[index]?.bedn.toLocaleString()}
               </span>
             </button>

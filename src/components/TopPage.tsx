@@ -98,7 +98,7 @@ export const TopPage = () => {
           </div>
         </div>
         <div className="rid grid-cols-1 text-center ">
-          <div className="border-[#ad232f] border-2 h-12 text-xs">
+          <div className="border-[#ad232f] border-2 h-12 text-[10px]">
             <p>
               臨床工学技士 {ventilatorInfo[47]?.ce.toLocaleString()}人 /
               人工呼吸器 {ventilatorInfo[47]?.ventilator.toLocaleString()}台 /
