@@ -138,6 +138,7 @@ export const TopPage = () => {
       <br />
       {/* 右都道府県チャート */}
       <PrefectureChart
+        className={"justify-center  md:justify-center"}
         propNcurrentpatients={ncurrentpatients}
         propBedNum={totalBedNum}
         // propVentilatorInfo={allVentilatorInfo}

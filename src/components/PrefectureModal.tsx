@@ -101,9 +101,11 @@ export const PrefectureModal = (props: any) => {
     ],
   };
   const options: any = {
-    maintainAspectRatio: false,
-    responsive: false,
-    padding: "200px",
+    // maintainAspectRatio: true,
+    // responsive: true,
+    // padding: "200px",
+    height: "100px",
+    width: "100px",
   };
 
   const lineData = {
@@ -128,6 +130,8 @@ export const PrefectureModal = (props: any) => {
   };
 
   const lineOptions: any = {
+    maintainAspectRatio: true,
+    responsive: true,
     scales: {
       emargencyChart: {
         type: "linear",
@@ -179,7 +183,7 @@ export const PrefectureModal = (props: any) => {
         %
       </p>
 
-      <div style={{ display: "inline-block" }}>
+      <div className="md:inline-block">
         <Pie data={data} width={"500"} height={"300"} options={options} />
 
         <p>
@@ -215,8 +219,9 @@ export const PrefectureModal = (props: any) => {
             一般社団法人 日本呼吸療法医学会 公益社団法人 日本臨床工学技士会
           </a>
         </p>
+        <br />
+        <Line data={lineData} width={230} height={170} options={lineOptions} />
       </div>
-      <Line data={lineData} width={70} height={30} options={lineOptions} />
     </div>
   );
 };

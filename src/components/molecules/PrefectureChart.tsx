@@ -93,22 +93,22 @@ export const PrefectureChart = (props: any) => {
       {/* parent */}
       <div className="md:grid md:basis-1/2">
         {/* grid_A */}
-        <div className=" text-center grid grid-cols-7 text-xs gap-1 pl-5">
+        <div className=" text-center grid grid-cols-7 text-xs gap-1 md:pl-5">
           {/* grid_B */}
           <button
             onClick={() => setIsOpen(true)}
             className="col-span-2 text-[4px]  bg-black text-white block align-middle"
           >
-            <span className="text-base">
+            <span className="text-[10px]">
               {props.propNcurrentpatients.toLocaleString()}
             </span>
             /
-            <span className="text-base">
+            <span className="text-[12px]">
               {props.propBedNum.toLocaleString()}
             </span>
             <p> (全国)現在患者数/対策病床数</p>
           </button>
-
+          {/* 都道府県 */}
           {prefectureInfo.map((item, index) => (
             <button
               key={item.cityName}
@@ -118,7 +118,7 @@ export const PrefectureChart = (props: any) => {
                 showModal(item.cityName, subBedNum[index]?.bedn);
               }}
             >
-              <p className="text-xs h-4">
+              <p className="text-[10px] h-4">
                 <span className="flex justify-center">
                   {item.cityName.replace("県", "")}
 
@@ -149,7 +149,7 @@ export const PrefectureChart = (props: any) => {
                 )}
                 %
               </p>
-              <span className="font-medium text-[5px]">
+              <span className="font-medium text-[3px]">
                 {item.ncurrentpatients.toLocaleString()}
               </span>
               /
