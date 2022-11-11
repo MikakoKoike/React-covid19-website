@@ -133,6 +133,9 @@ export const PrefectureModal = (props: any) => {
   };
 
   const lineOptions: any = {
+    animation: {
+      duration: 0,
+    },
     maintainAspectRatio: false,
     // responsive: false,
     scales: {
