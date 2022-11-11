@@ -101,8 +101,8 @@ export const PrefectureModal = (props: any) => {
     ],
   };
   const options: any = {
-    // maintainAspectRatio: true,
-    // responsive: true,
+    maintainAspectRatio: true,
+    responsive: true,
     // padding: "200px",
     height: "100px",
     width: "100px",
@@ -134,13 +134,13 @@ export const PrefectureModal = (props: any) => {
 
   const lineOptions: any = {
     maintainAspectRatio: true,
-    // responsive: true,
+    responsive: true,
     scales: {
       emargencyChart: {
         type: "linear",
         position: "left",
         title: {
-          display: true,
+          display: window.screen.width > 414,
           text: "PCR検査陽性者数・累計死亡者数・緊急搬送困難事案数",
           font: {
             size: 10,
@@ -151,22 +151,22 @@ export const PrefectureModal = (props: any) => {
         type: "linear",
         position: "right",
         title: {
-          display: true,
+          display: window.screen.width > 414,
           text: "PCR検査実施件数・現在入院治療を要する者",
           font: {
             size: 10,
           },
         },
       },
-      // plugins: {
-      //   font: function (context: any) {
-      //     var width = context.chart.width;
-      //     var size = Math.round(width / 32);
-      //     return {
-      //       size: size,
-      //     };
-      //   },
-      // },
+      plugins: {
+        // font: function (context: any) {
+        //   var width = context.chart.width;
+        //   var size = Math.round(width / 32);
+        //   return {
+        //     size: size,
+        //   };
+        // },
+      },
     },
   };
   const dispatch = useDispatch<AppStore>();
@@ -238,9 +238,16 @@ export const PrefectureModal = (props: any) => {
           </a>
         </p>
         <br />
-        <Line data={lineData} width={120} height={70} options={lineOptions} />
-        {/* <Line data={lineData} options={lineOptions} /> */}
+        <div className="relative">
+          <Line
+            data={lineData}
+            width={500}
+            height={350}
+            options={lineOptions}
+          />
+        </div>
       </div>
+      {/* <Line data={lineData} options={lineOptions} /> */}
     </div>
   );
 };
