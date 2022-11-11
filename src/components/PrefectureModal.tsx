@@ -101,11 +101,11 @@ export const PrefectureModal = (props: any) => {
     ],
   };
   const options: any = {
-    maintainAspectRatio: true,
-    responsive: true,
+    maintainAspectRatio: false,
+    // responsive: true,
     // padding: "200px",
-    height: "100px",
-    width: "100px",
+    // height: "100px",
+    // width: "100px",
   };
 
   const lineData = {
@@ -205,8 +205,9 @@ export const PrefectureModal = (props: any) => {
       </p>
 
       <div className="md:inline-block">
-        <Pie data={data} width={"500"} height={"300"} options={options} />
-
+        <div className="md:w-auto md:h-auto">
+          <Pie data={data} width={"500"} height={"300"} options={options} />
+        </div>
         <p>
           <span>累積陽性者:{propData[0]?.npatients.toLocaleString()}人</span>
           <span> 累積退院者:{propData[0]?.nexits.toLocaleString()}人</span>
