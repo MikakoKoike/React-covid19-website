@@ -238,7 +238,7 @@ export const PrefectureModal = (props: any) => {
           </a>
         </p>
         <br />
-        <div className="relative">
+        <div className="relative w-auto h-auto">
           <Line
             data={lineData}
             width={500}
