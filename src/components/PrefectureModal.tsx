@@ -103,9 +103,6 @@ export const PrefectureModal = (props: any) => {
   const options: any = {
     maintainAspectRatio: false,
     // responsive: true,
-    // padding: "200px",
-    // height: "100px",
-    // width: "100px",
   };
 
   const lineData = {
@@ -245,8 +242,8 @@ export const PrefectureModal = (props: any) => {
         <div className="md:w-auto md:h-auto">
           <Line
             data={lineData}
-            width={280}
-            height={230}
+            width={310}
+            height={270}
             options={lineOptions}
           />
         </div>
