@@ -54,7 +54,8 @@ export const JapanChart = (props: any) => {
     ],
   };
   const options: any = {
-    padding: "200px",
+    maintainAspectRatio: false,
+    responsive: false,
   };
 
   return (
@@ -67,7 +68,7 @@ export const JapanChart = (props: any) => {
         %
       </p>
       <div className="md:inline-block">
-        <Pie data={data} width={"500"} height={"350"} options={options} />
+        <Pie data={data} width={"500"} height={"300"} options={options} />
         <p>
           <span>累積陽性者:{npatients.toLocaleString()}人</span>
           <span> 累積退院者:{nexits.toLocaleString()}人</span>

@@ -102,7 +102,6 @@ export const PrefectureModal = (props: any) => {
   };
   const options: any = {
     maintainAspectRatio: false,
-    // responsive: true,
   };
 
   const lineData = {
@@ -157,15 +156,6 @@ export const PrefectureModal = (props: any) => {
             size: 10,
           },
         },
-      },
-      plugins: {
-        // font: function (context: any) {
-        //   var width = context.chart.width;
-        //   var size = Math.round(width / 32);
-        //   return {
-        //     size: size,
-        //   };
-        // },
       },
     },
   };
@@ -248,7 +238,6 @@ export const PrefectureModal = (props: any) => {
           />
         </div>
       </div>
-      {/* <Line data={lineData} options={lineOptions} /> */}
     </div>
   );
 };

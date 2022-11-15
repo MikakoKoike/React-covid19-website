@@ -126,7 +126,6 @@ export const PrefectureChart = (props: any) => {
                     if (ratioData[index]?.dcurrentpatients > 0) {
                       return (
                         <UpArrow
-                          className=""
                           src={require("../../images/arrow.png")}
                         ></UpArrow>
                       );

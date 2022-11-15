@@ -145,7 +145,6 @@ export const TopPage = () => {
         className={"justify-center  md:justify-center"}
         propNcurrentpatients={ncurrentpatients}
         propBedNum={totalBedNum}
-        // propVentilatorInfo={allVentilatorInfo}
       ></PrefectureChart>
     </div>
   );
