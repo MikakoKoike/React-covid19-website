@@ -54,8 +54,7 @@ export const JapanChart = (props: any) => {
     ],
   };
   const options: any = {
-    maintainAspectRatio: false,
-    responsive: false,
+    padding: "200px",
   };
 
   return (
