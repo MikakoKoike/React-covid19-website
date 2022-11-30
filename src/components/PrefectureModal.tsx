@@ -164,6 +164,7 @@ export const PrefectureModal = (props: any) => {
   useEffect(() => {
     dispatch(fetchCovid19japanAll());
   }, []);
+
   useEffect(() => {
     setPropData(
       props.propsPrefectureInfo.filter(
@@ -182,7 +183,6 @@ export const PrefectureModal = (props: any) => {
   return (
     <div className="text-center">
       <p>
-        {" "}
         {props.propsCityName} 現在患者数/対策病床数
         {Math.floor(
           (Number(propData[0]?.ncurrentpatients) / Number(props.propsBedn)) *
