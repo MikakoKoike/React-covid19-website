@@ -127,12 +127,14 @@ export const PrefectureChart = (props: any) => {
                       return (
                         <UpArrow
                           src={require("../../images/arrow.png")}
+                          alt=""
                         ></UpArrow>
                       );
                     } else {
                       return (
                         <DownArrow
                           src={require("../../images/downArrow.png")}
+                          alt=""
                         ></DownArrow>
                       );
                     }
