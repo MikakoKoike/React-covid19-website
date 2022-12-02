@@ -127,14 +127,12 @@ export const PrefectureChart = (props: any) => {
                       return (
                         <UpArrow
                           src={require("../../images/arrow.png")}
-                          alt=""
                         ></UpArrow>
                       );
                     } else {
                       return (
                         <DownArrow
                           src={require("../../images/downArrow.png")}
-                          alt=""
                         ></DownArrow>
                       );
                     }
@@ -142,6 +140,7 @@ export const PrefectureChart = (props: any) => {
                 </span>
               </p>
               <p className="text-[10px] md:text-xs">
+                {/* //10 */}
                 {Math.floor(
                   Number(
                     (item.ncurrentpatients / Number(subBedNum[index]?.bedn)) *
@@ -151,11 +150,13 @@ export const PrefectureChart = (props: any) => {
                 %
               </p>
               <span className="font-medium text-[6px] md:text-xs">
+                {/* //6 */}
                 {item.ncurrentpatients.toLocaleString()}/
               </span>
 
               <span className="text-[6px]">
                 {subBedNum[index]?.bedn.toLocaleString()}
+                {/* //6 */}
               </span>
             </button>
           ))}
