@@ -8,13 +8,13 @@ export const Footer = () => {
   return (
     <div>
       <div className="flex py-4 ">
-        <img src={bannerA} alt="bannerA" className="w-1/3 px-2" />
+        <img src={bannerA} alt="bannerA" className="w-1/3 px-2 h-20" />
         <img
           src={bannerB}
           alt="bannerB"
-          className="w-1/3 px-2 border-solid border"
+          className="w-1/3 px-2 h-20 border-solid border"
         />
-        <img src={bannerC} alt="bannerC" className="w-1/3 px-2" />
+        <img src={bannerC} alt="bannerC" className="w-1/3 px-2 h-20" />
       </div>
     </div>
   );

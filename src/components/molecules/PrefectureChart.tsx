@@ -127,19 +127,21 @@ export const PrefectureChart = (props: any) => {
                       return (
                         <UpArrow
                           src={require("../../images/arrow.png")}
+                          alt=""
                         ></UpArrow>
                       );
                     } else {
                       return (
                         <DownArrow
                           src={require("../../images/downArrow.png")}
+                          alt=""
                         ></DownArrow>
                       );
                     }
                   })()}
                 </span>
               </p>
-              <p className="text-[10px] md:text-xs">
+              <p className="text-[14px] md:text-xs">
                 {/* //10 */}
                 {Math.floor(
                   Number(
@@ -149,12 +151,12 @@ export const PrefectureChart = (props: any) => {
                 )}
                 %
               </p>
-              <span className="font-medium text-[6px] md:text-xs">
+              <span className="font-medium text-[12px] md:text-xs">
                 {/* //6 */}
                 {item.ncurrentpatients.toLocaleString()}/
               </span>
 
-              <span className="text-[6px]">
+              <span className="text-[12px]">
                 {subBedNum[index]?.bedn.toLocaleString()}
                 {/* //6 */}
               </span>
